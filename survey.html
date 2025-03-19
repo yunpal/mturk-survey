@@ -3,8 +3,6 @@
 <head>
   <meta charset="utf-8" />
   <title>2-Image Comparison Survey</title>
-  <!-- Include jQuery or crowd-html-elements.js if needed -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
   <style>
     body {
@@ -32,11 +30,6 @@
       height: 256px;
       display: block;
       margin-bottom: 10px;
-    }
-    .submit-btn {
-      margin-top: 30px;
-      font-size: 1.2em;
-      padding: 10px 20px;
     }
   </style>
 </head>
@@ -72,21 +65,19 @@
         <div class="image-box">
           <h3>Image A</h3>
           <img src="https://via.placeholder.com/256x256?text=Survey1_A" alt="Survey1_A" />
-          <label>
-            <input type="radio" name="survey1_answer" value="A" required />
-            Select
-          </label>
         </div>
         <!-- Image B -->
         <div class="image-box">
           <h3>Image B</h3>
           <img src="https://via.placeholder.com/256x256?text=Survey1_B" alt="Survey1_B" />
-          <label>
-            <input type="radio" name="survey1_answer" value="B" required />
-            Select
-          </label>
         </div>
       </div>
+
+      <!-- Replacing radio buttons with MTurk's crowd-radio-group -->
+      <crowd-radio-group name="survey1_answer">
+        <crowd-radio-button value="A">Select Image A</crowd-radio-button>
+        <crowd-radio-button value="B">Select Image B</crowd-radio-button>
+      </crowd-radio-group>
     </div>
 
     <!-- Survey 2 -->
@@ -101,26 +92,19 @@
         <div class="image-box">
           <h3>Image A</h3>
           <img src="https://via.placeholder.com/256x256?text=Survey2_A" alt="Survey2_A" />
-          <label>
-            <input type="radio" name="survey2_answer" value="A" required />
-            Select
-          </label>
         </div>
         <!-- Image B -->
         <div class="image-box">
           <h3>Image B</h3>
           <img src="https://via.placeholder.com/256x256?text=Survey2_B" alt="Survey2_B" />
-          <label>
-            <input type="radio" name="survey2_answer" value="B" required />
-            Select
-          </label>
         </div>
       </div>
-    </div>
 
-    <!-- Submit button -->
-    <div style="text-align: center;">
-      <input type="submit" class="submit-btn" value="Submit Survey" />
+      <!-- Replacing radio buttons with MTurk's crowd-radio-group -->
+      <crowd-radio-group name="survey2_answer">
+        <crowd-radio-button value="A">Select Image A</crowd-radio-button>
+        <crowd-radio-button value="B">Select Image B</crowd-radio-button>
+      </crowd-radio-group>
     </div>
 
   </crowd-form>
