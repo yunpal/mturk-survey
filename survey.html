@@ -1,114 +1,138 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>2-Image Comparison Survey</title>
-  <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
-  <style>
-    body {
-      padding: 20px;
-      font-family: Arial, sans-serif;
-    }
-    .survey-container {
-      margin-bottom: 40px;
-    }
-    .question-title {
-      font-weight: bold;
-      margin-bottom: 10px;
-      font-size: 1.2em;
-    }
-    .image-comparison {
-      display: flex;
-      gap: 50px;
-      margin-top: 20px;
-    }
-    .image-box {
-      text-align: center;
-    }
-    .image-box img {
-      width: 256px;
-      height: 256px;
-      display: block;
-      margin-bottom: 10px;
-    }
-  </style>
-</head>
-<body>
+<meta charset="utf-8" />
+<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+<style type="text/css">body {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  .survey-container {
+    margin-bottom: 40px;
+  }
+  .question-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+  }
+  .image-comparison {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 50px;
+    margin-top: 20px;
+  }
+  .image-box {
+    text-align: center;
+  }
+  .image-box img {
+    width: 256px;
+    height: 256px;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .submit-btn {
+    margin-top: 30px;
+    font-size: 1.2em;
+    padding: 10px 20px;
+  }
+  .source-center {
+    text-align: center;
+    margin-left: -500px;
+  }
+</style>
+<crowd-form> <crowd-instructions link-text="View instructions" link-type="button"> <short-summary style="font-size: 18px; line-height: 150%;">
+<p>Thank you for participating in our two-question survey.<br />
+In each survey, you will see multiple images and choose one based on the question.</p>
+</short-summary> <detailed-instructions style="font-size: 18px; line-height: 150%;">
+<p>&bull; <strong>#survey1</strong>: Among the given images, choose the one that looks more natural and whose noise is more imperceptible.<br />
+&bull; <strong>#survey2</strong>: Among the generated images, choose the one that looks more unnatural.</p>
+</detailed-instructions> </crowd-instructions> <!-- Survey 1 -->
 
-  <crowd-form>
+<div class="survey-container" id="survey1">
+<h2>#survey1</h2>
 
-    <crowd-instructions link-text="View instructions" link-type="button">
-      <short-summary style="font-size: 18px; line-height: 150%;">
-        <p>
-          Thank you for participating in our two-question survey.<br/>
-          In each survey, you will see two images and choose one based on the question.
-        </p>
-      </short-summary>
+<div class="question-title">After reading the question, choose one image in response to the prompt</div>
 
-      <detailed-instructions style="font-size: 18px; line-height: 150%;">
-        <p>
-          • <strong>#survey1</strong>: Among the two given images, choose the one that looks more natural and whose noise is more imperceptible.<br/>
-          • <strong>#survey2</strong>: Among the two generated images, choose the one that looks more unnatural.<br/>
-        </p>
-      </detailed-instructions>
-    </crowd-instructions>
+<p><strong>Question: We added noise over the images to protect them from malicious use.</strong></p>
 
-    <!-- Survey 1 -->
-    <div class="survey-container" id="survey1">
-      <h2>#survey1</h2>
-      <div class="question-title">After reading the question, choose one image in response to the prompt.</div>
-      <p><strong>Question: We added noise over the images to protect them from malicious use.</strong></p>
-      <p><strong>Among the two given images, choose the one that looks more natural and whose noise is more imperceptible.</strong></p>
+<p><strong>Among the five given images, choose the one that looks more natural and whose noise is more imperceptible.</strong></p>
 
-      <div class="image-comparison">
-        <!-- Image A -->
-        <div class="image-box">
-          <h3>Image A</h3>
-          <img src="https://via.placeholder.com/256x256?text=Survey1_A" alt="Survey1_A" />
-        </div>
-        <!-- Image B -->
-        <div class="image-box">
-          <h3>Image B</h3>
-          <img src="https://via.placeholder.com/256x256?text=Survey1_B" alt="Survey1_B" />
-        </div>
-      </div>
+<div class="image-comparison"><!-- Image A -->
+<div class="image-box">
+<h3>Image A</h3>
+<img alt="Survey1_A" src="${survey1_A}" /> <label> <input name="survey1_answer" required="" type="radio" value="A" /> Select </label></div>
+<!-- Image B -->
 
-      <!-- MTurk-compatible radio buttons -->
-      <crowd-radio-group name="survey1_answer">
-        <crowd-radio-button value="A">Select Image A</crowd-radio-button>
-        <crowd-radio-button value="B">Select Image B</crowd-radio-button>
-      </crowd-radio-group>
-    </div>
+<div class="image-box">
+<h3>Image B</h3>
+<img alt="Survey1_B" src="${survey1_B}" /> <label> <input name="survey1_answer" required="" type="radio" value="B" /> Select </label></div>
+<!-- Image C -->
 
-    <!-- Survey 2 -->
-    <div class="survey-container" id="survey2">
-      <h2>#survey2</h2>
-      <div class="question-title">After reading the question, choose one image in response to the prompt.</div>
-      <p><strong>Question: We generated two images from #survey1 using a textual prompt.</strong></p>
-      <p><strong>Among the two generated images, choose the one that looks more unnatural.</strong></p>
+<div class="image-box">
+<h3>Image C</h3>
+<img alt="Survey1_C" src="${survey1_C}" /> <label> <input name="survey1_answer" required="" type="radio" value="C" /> Select </label></div>
+<!-- Image D -->
 
-      <div class="image-comparison">
-        <!-- Image A -->
-        <div class="image-box">
-          <h3>Image A</h3>
-          <img src="https://via.placeholder.com/256x256?text=Survey2_A" alt="Survey2_A" />
-        </div>
-        <!-- Image B -->
-        <div class="image-box">
-          <h3>Image B</h3>
-          <img src="https://via.placeholder.com/256x256?text=Survey2_B" alt="Survey2_B" />
-        </div>
-      </div>
+<div class="image-box">
+<h3>Image D</h3>
+<img alt="Survey1_D" src="${survey1_D}" /> <label> <input name="survey1_answer" required="" type="radio" value="D" /> Select </label></div>
+<!-- Image E -->
 
-      <!-- MTurk-compatible radio buttons -->
-      <crowd-radio-group name="survey2_answer">
-        <crowd-radio-button value="A">Select Image A</crowd-radio-button>
-        <crowd-radio-button value="B">Select Image B</crowd-radio-button>
-      </crowd-radio-group>
-    </div>
+<div class="image-box">
+<h3>Image E</h3>
+<img alt="Survey1_E" src="${survey1_E}" /> <label> <input name="survey1_answer" required="" type="radio" value="E" /> Select </label></div>
+</div>
+</div>
+<!-- Survey 2 -->
 
-  </crowd-form>
+<div class="survey-container" id="survey2">
+<h2>#survey2</h2>
 
-</body>
-</html>
+<div class="question-title">After reading the question, choose one image in response to the prompt:&nbsp;</div>
 
+<p><strong>Question: We generated five images from #survey1 using a prompt (<strong style="font-size: 15.6px;">&quot;&nbsp;${prompt_text}&nbsp;&quot;</strong>).</strong></p>
+
+<p><strong>Among the five generated images, choose the one that looks different from the source image.</strong></p>
+
+<div class="source-image-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); margin-bottom: 20px;">
+<div>&nbsp;</div>
+
+<div>&nbsp;</div>
+
+<div class="source-center">
+<h3>Source Image</h3>
+<img alt="Source Image" src="${source_img}" style="width:256px; height:256px;" /></div>
+
+<div>&nbsp;</div>
+
+<div>&nbsp;</div>
+</div>
+
+<div class="image-comparison"><!-- Image A -->
+<div class="image-box">
+<h3>Image A</h3>
+<img alt="Survey2_A" src="${survey2_A}" /> <label> <input name="survey2_answer" required="" type="radio" value="A" /> Select </label></div>
+<!-- Image B -->
+
+<div class="image-box">
+<h3>Image B</h3>
+<img alt="Survey2_B" src="${survey2_B}" /> <label> <input name="survey2_answer" required="" type="radio" value="B" /> Select </label></div>
+<!-- Image C -->
+
+<div class="image-box">
+<h3>Image C</h3>
+<img alt="Survey2_C" src="${survey2_C}" /> <label> <input name="survey2_answer" required="" type="radio" value="C" /> Select </label></div>
+<!-- Image D -->
+
+<div class="image-box">
+<h3>Image D</h3>
+<img alt="Survey2_D" src="${survey2_D}" /> <label> <input name="survey2_answer" required="" type="radio" value="D" /> Select </label></div>
+<!-- Image E -->
+
+<div class="image-box">
+<h3>Image E</h3>
+<img alt="Survey2_E" src="${survey2_E}" /> <label> <input name="survey2_answer" required="" type="radio" value="E" /> Select </label></div>
+</div>
+</div>
+<!-- Submit button -->
+
+<div style="text-align: center;"><input class="submit-btn" type="submit" value="Submit Survey" /></div>
+</crowd-form>
